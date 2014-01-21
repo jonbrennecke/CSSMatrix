@@ -1,7 +1,7 @@
 CSSMatrix
 =========
 
-A WebkitCSSMatrix and MSCSSMatrix polyfill for older browsers and browsers (specifically Firefox and Opera) without current support for this feature.
+A <code>WebkitCSSMatrix</code> and <code>MSCSSMatrix</code> polyfill for older browsers and browsers (specifically Firefox and Opera) without current support for this feature.
 
 The CSSMatrix objects represent a 4x4 homogeneous matrix for 3D transforms. The development target is to mirror the functionality provided by the native WebkitCSSMatrix object.
 
@@ -15,6 +15,6 @@ A few links to help you understand...
 <a href="https://developer.apple.com/library/safari/documentation/AudioVideo/Reference/WebKitCSSMatrixClassReference/WebKitCSSMatrix/WebKitCSSMatrix.html">SDL description of WebkitCSSMatrix</a> 
 
 
-Nota Bene : functions encapsulated by double dashes, i.e. <code>__functionName__</code> are utility functions designed to optimize the matrix's calculations, but do not appear in either the WebkitCSSMatrix or the MSCSSMatrix spec.
+Nota Bene : functions encapsulated by double dashes, i.e. <code>\_\_functionName\_\_</code> are utility functions designed to optimize the matrix's calculations, but do not appear in either the WebkitCSSMatrix or the MSCSSMatrix spec.
 
 
