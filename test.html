@@ -21,15 +21,35 @@
 		background-color: #666;
 	}
 	
-	div#custom {}
+	label {
+		color: #aaa;
+		position: relative;
+		height: 1em;
+		width: 10em;
+	}
 
-	div#webkit {}
+	ul#ctrl {
+		list-style: none;
+	}
+
+	ul#ctrl li {
+		display: inline-block;
+		height: 2em;
+		width: 10em;
+		padding-top: 0.5em;
+		/*border: 1px solid #111;*/
+	}
+
+	ul#ctrl li label {
+		float: right;
+	}
 
 	</style>
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
  	<script type="text/javascript" src="cssmatrix.js"></script>
 	<script type="text/javascript">
 
-	var inputs = [ 'rotate', 'translate', 'skewX', 'skewY', 'scale' ];
+	var inputs = [ 'rotateX', 'rotateY', 'rotateZ', 'translate', 'skewX', 'skewY', 'scale' ];
 
 	window.onload = function(){
 		
@@ -38,34 +58,33 @@
 			controls = document.getElementById('ctrl');
 
 		for(var i=0;i<inputs.length;i++){
-			var input = document.createElement('input');
-			input.type = 'range'; input.value = 0; input.step = 0.1; input.min = -10; input.max = 10; input.name = inputs[i];
 
-			span = document.createElement('span');
-			span.innerText = inputs[i];
-			controls.appendChild( span )
-			controls.appendChild(input)
+			$(controls).append(
+				"<li><label for='" + inputs[i] + "'>" + inputs[i] + 
+				"</label><input type='range' value='0' step='0.1' min='-10' max='10' name='" + 
+				inputs[i] + "' id='" + inputs[i] + "' /></li>")
+
 		}
 	
-		window.addEventListener('mousemove',function(e){
+		// window.addEventListener('mousemove',function(e){
 
-			var m1 = new WebKitCSSMatrix();
+		// 	var m1 = new WebKitCSSMatrix();
 
-			// scale x1 and y1 to the interval (-1,1)
-			var x1 = (e.x / window.innerWidth - 0.5 ) * 2,
-				y1 = - (e.y / window.innerHeight - 0.5 ) * 2;
+		// 	// scale x1 and y1 to the interval (-1,1)
+		// 	var x1 = (e.x / window.innerWidth - 0.5 ) * 2,
+		// 		y1 = - (e.y / window.innerHeight - 0.5 ) * 2;
 
-			webkit.style.webkitTransform = m1.translate(35*x1,-15*y1,0).toString();
+		// 	webkit.style.webkitTransform = m1.translate(35*x1,-15*y1,0).toString();
 
-			var m2 = new CSSMatrix();
+		// 	var m2 = new CSSMatrix();
 
-			// scale x2 and y2 to the interval (-1,1)
-			var x2 = (e.x / window.innerWidth - 0.5 ) * 2,
-				y2 = - (e.y / window.innerHeight - 0.5 ) * 2;
+		// 	// scale x2 and y2 to the interval (-1,1)
+		// 	var x2 = (e.x / window.innerWidth - 0.5 ) * 2,
+		// 		y2 = - (e.y / window.innerHeight - 0.5 ) * 2;
 
-			custom.style.webkitTransform = m2.translate(35*x2,-15*y2,0).toString();
+		// 	custom.style.webkitTransform = m2.translate(35*x2,-15*y2,0).toString();
 
-		},false);
+		// },false);
 
 	}
 
@@ -98,8 +117,9 @@
 	</div>
 </div>
 
-<div id="ctrl">
-
+<div id="controls">
+	<ul id="ctrl">
+	</ul>
 </div>
 
 	
