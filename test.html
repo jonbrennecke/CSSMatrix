@@ -2,11 +2,14 @@
 <html>
 <head>
 	<style type="text/css">
+
+	div#container {
+		webkit-perspective: 500px;
+		webkit-perspective-origin: 50% 50%;
+	}
 	
 	div#custom {
 		position: relative;
-		/*float: left;*/
-		/*margin: 15px;*/
 		height: 200px;
 		width: 200px;
 		background-color: #666;
@@ -22,16 +25,37 @@
 	</style>
 	<script type="text/javascript" src="cssmatrix.js"></script>
 	<script type="text/javascript">
+
+	var inputs = [ 'rotateX' ]
 	
 	window.onload = function(){
 		
 		var custom = document.getElementById('custom');
+		var webkit = document.getElementById('webkit');
 
-		var m = window.getComputedStyle(custom).webkitTransform;
+		window.addEventListener('mousemove',function(e){
 
-		console.log(new CSSMatrix(m))
+			var m1 = new WebKitCSSMatrix();
 
-		custom.style.webkitTransform
+			// scale x1 and y1 to the interval (-1,1)
+			var x1 = (e.x / window.innerWidth - 0.5 ) * 2,
+				y1 = - (e.y / window.innerHeight - 0.5 ) * 2;
+
+			webkit.style.webkitTransform = m1.translate(35*x1,-15*y1,0).toString();
+
+			// console.log('webkit:', m1.translate(35*x1,-15*y1,0))
+
+			var m2 = new CSSMatrix();
+
+			// scale x2 and y2 to the interval (-1,1)
+			var x2 = (e.x / window.innerWidth - 0.5 ) * 2,
+				y2 = - (e.y / window.innerHeight - 0.5 ) * 2;
+
+			custom.style.webkitTransform = m2.translate(35*x2,-15*y2,0).toString();
+
+			// console.log('custom: ', m2.translate(35*x2,-15*y2,0))
+
+		},false);
 
 	}
 
@@ -39,8 +63,21 @@
 </head>
 <body>
 
-<div id="custom">CSSMatrix</div>
-<div id="webkit">WebKitCSSMatrix</div>
+<div id="container">
+	<div id="custom">CSSMatrix</div>
+	<div id="webkit">WebKitCSSMatrix</div>
+</div>
+
+<div id="controller">
+	<ul>
+		<li><input type="range" min="-1000" max="1000" step="1" value="100" id="i11"></li>
+		<li><input type="range" min="-1000" max="1000" step="1" value="100" id="i11"></li>
+		<li><input type="range" min="-1000" max="1000" step="1" value="100" id="i11"></li>
+		<li><input type="range" min="-1000" max="1000" step="1" value="100" id="i11"></li>
+		<li><input type="range" min="-1000" max="1000" step="1" value="100" id="i11"></li>
+	</ul>
+</div>
+
 	
 </body>
 </html>

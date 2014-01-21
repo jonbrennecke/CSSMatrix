@@ -12,7 +12,7 @@
 var CSSMatrix = function(str){
 
 	// if no input string is provided, then return the 4x4 identity matrix
-	if(!str) {
+	if(!str || str === 'none') {
 		for(var i=0, j=0;i<16;i++){
 			this['m'+((i/4|0)+1)+(i%4+1)] = i%4==(i/4|0) ? 1 : 0; 
 		}
@@ -356,10 +356,10 @@ CSSMatrix.prototype = {
 	translate : function(x,y,z){
 		var m = this.__clone__(), z = z || 0;
 
-		m.m14 = m.m11 * x + m.m12 * y + mm.m13 * z + m.m14;
-		m.m24 = m.m21 * x + m.m22 * y + mm.m23 * z + m.m24
-		m.m34 = m.m31 * x + m.m41 * y + mm.m33 * z + m.n34;
-		m.m44 = m.m41 * x + m.m42 * y + mm.m43 * z + m.m44;
+		m.m41 = m.m11 * x + m.m21 * y + m.m31 * z + m.m41;
+		m.m42 = m.m12 * x + m.m22 * y + m.m32 * z + m.m42
+		m.m43 = m.m13 * x + m.m14 * y + m.m33 * z + m.m43;
+		m.m44 = m.m14 * x + m.m24 * y + m.m34 * z + m.m44;
 
 		return m;
 	},
