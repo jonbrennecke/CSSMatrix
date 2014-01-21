@@ -48,8 +48,17 @@
  	<script type="text/javascript" src="cssmatrix.js"></script>
 	<script type="text/javascript">
 
+	/**
+	 *
+	 * This script serves as a demonstration of the CSSMatrix polyfill by placing it alongside the 
+	 * native WebKitCSSMatrix.
+	 *
+	 * (C) Jonathan Brenencke, 2014. Released under the MIT License.  
+	 */
+
 	var inputs = [ 'rotateX', 'rotateY', 'rotateZ', 'translateX', 'translateY', 'translateZ', 'skewX', 'skewY', 'scaleX', 'scaleY', 'scaleZ' ];
 
+	// the Controller attaches the range inputs to their respective matrix functions
 	var Ctrlr = function(){
 		this.webkit = $('#webkit');
 		this.custom = $('#custom');
