@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+	
+	div#custom {
+		position: relative;
+		/*float: left;*/
+		/*margin: 15px;*/
+		height: 200px;
+		width: 200px;
+		background-color: #666;
+	}
+
+	div#webkit {
+		position: relative;
+		height: 200px;
+		width: 200px;
+		background-color: #888;
+	}
+
+	</style>
+	<script type="text/javascript" src="cssmatrix.js"></script>
+	<script type="text/javascript">
+	
+	window.onload = function(){
+		
+		var custom = document.getElementById('custom');
+
+		var m = window.getComputedStyle(custom).webkitTransform;
+
+		console.log(new CSSMatrix(m))
+
+		custom.style.webkitTransform
+
+	}
+
+	</script>
+</head>
+<body>
+
+<div id="custom">CSSMatrix</div>
+<div id="webkit">WebKitCSSMatrix</div>
+	
+</body>
+</html>
