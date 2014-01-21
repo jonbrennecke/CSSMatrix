@@ -1,12 +1,13 @@
 CSSMatrix
 =========
 
+### Description
 A <code>WebkitCSSMatrix</code> and <code>MSCSSMatrix</code> polyfill for older browsers and browsers (specifically Firefox and Opera) without current support for this feature.
 
-The <code>CSSMatrix</code> object represent a 4x4 homogeneous matrix for 3D transforms.  The development target is to mirror the functionality provided by the native <code>WebkitCSSMatrix</code> object.  Towards that goal, the only function remaining unimplemented at the moment is <code>rotate()</code>. (To match <code>MSCSSMatrix</code>, the function <code>multiplyLeft()</code> will need to be implemented as well).
+The <code>CSSMatrix</code> object represent a 4x4 homogeneous matrix for 3D transforms. It should be consistent with the standards specified by <code>WebkitCSSMatrix</code>.
 
 
-A few links for you...
+### Links
 
 <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh453593.aspx">MSDN description of MSCSSMatrix</a>
 
@@ -16,6 +17,9 @@ A few links for you...
 
 <a href="http://www.w3.org/TR/css3-3d-transforms/#cssmatrix-interface">W3C specification for 3D Transformations</a>
 
+### Development 
+
+The development target is to mirror the functionality provided by the native <code>WebkitCSSMatrix</code> object.  Towards that goal, the only function remaining unimplemented at the moment is <code>rotate()</code>. (To match <code>MSCSSMatrix</code>, the function <code>multiplyLeft()</code> will need to be implemented as well).
 
 Nota Bene : functions encapsulated by double dashes, i.e. <code>\_\_functionName\_\_</code> are utility functions designed to optimize the matrix's calculations, but which do not appear in either the WebkitCSSMatrix or the MSCSSMatrix spec.
 
