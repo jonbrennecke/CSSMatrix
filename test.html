@@ -3,36 +3,50 @@
 <head>
 	<style type="text/css">
 
+	body {	background-color: #222; }
+
 	div#container {
 		webkit-perspective: 500px;
 		webkit-perspective-origin: 50% 50%;
+		webkit-transform-style: preserve-3d;
+		padding: 25px;
+		font-family: Courier;
+		text-align: center;
 	}
-	
-	div#custom {
+
+	div.cssmatrix {
 		position: relative;
 		height: 200px;
-		width: 200px;
+		width: 300px;
 		background-color: #666;
 	}
+	
+	div#custom {}
 
-	div#webkit {
-		position: relative;
-		height: 200px;
-		width: 200px;
-		background-color: #888;
-	}
+	div#webkit {}
 
 	</style>
-	<script type="text/javascript" src="cssmatrix.js"></script>
+ 	<script type="text/javascript" src="cssmatrix.js"></script>
 	<script type="text/javascript">
 
-	var inputs = [ 'rotateX' ]
-	
+	var inputs = [ 'rotate', 'translate', 'skewX', 'skewY', 'scale' ];
+
 	window.onload = function(){
 		
-		var custom = document.getElementById('custom');
-		var webkit = document.getElementById('webkit');
+		var custom = document.getElementById('custom'),
+			webkit = document.getElementById('webkit'),
+			controls = document.getElementById('ctrl');
 
+		for(var i=0;i<inputs.length;i++){
+			var input = document.createElement('input');
+			input.type = 'range'; input.value = 0; input.step = 0.1; input.min = -10; input.max = 10; input.name = inputs[i];
+
+			span = document.createElement('span');
+			span.innerText = inputs[i];
+			controls.appendChild( span )
+			controls.appendChild(input)
+		}
+	
 		window.addEventListener('mousemove',function(e){
 
 			var m1 = new WebKitCSSMatrix();
@@ -43,8 +57,6 @@
 
 			webkit.style.webkitTransform = m1.translate(35*x1,-15*y1,0).toString();
 
-			// console.log('webkit:', m1.translate(35*x1,-15*y1,0))
-
 			var m2 = new CSSMatrix();
 
 			// scale x2 and y2 to the interval (-1,1)
@@ -52,8 +64,6 @@
 				y2 = - (e.y / window.innerHeight - 0.5 ) * 2;
 
 			custom.style.webkitTransform = m2.translate(35*x2,-15*y2,0).toString();
-
-			// console.log('custom: ', m2.translate(35*x2,-15*y2,0))
 
 		},false);
 
@@ -64,18 +74,32 @@
 <body>
 
 <div id="container">
-	<div id="custom">CSSMatrix</div>
-	<div id="webkit">WebKitCSSMatrix</div>
+	<div id="custom" class="cssmatrix">
+		<h3>CSSMatrix Polyfill</h3>
+		<table>
+			<tbody>
+				<tr><td>m11</td><td>m12</td><td>m13</td><td>m14</td></tr>
+				<tr><td>m21</td><td>m22</td><td>m23</td><td>m24</td></tr>
+				<tr><td>m31</td><td>m32</td><td>m33</td><td>m34</td></tr>
+				<tr><td>m41</td><td>m42</td><td>m43</td><td>m44</td></tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="webkit" class="cssmatrix">
+		<h3>WebKitCSSMatrix</h3>
+		<table>
+			<tbody>
+				<tr><td>m11</td><td>m12</td><td>m13</td><td>m14</td></tr>
+				<tr><td>m21</td><td>m22</td><td>m23</td><td>m24</td></tr>
+				<tr><td>m31</td><td>m32</td><td>m33</td><td>m34</td></tr>
+				<tr><td>m41</td><td>m42</td><td>m43</td><td>m44</td></tr>
+			</tbody>
+		</table>
+	</div>
 </div>
 
-<div id="controller">
-	<ul>
-		<li><input type="range" min="-1000" max="1000" step="1" value="100" id="i11"></li>
-		<li><input type="range" min="-1000" max="1000" step="1" value="100" id="i11"></li>
-		<li><input type="range" min="-1000" max="1000" step="1" value="100" id="i11"></li>
-		<li><input type="range" min="-1000" max="1000" step="1" value="100" id="i11"></li>
-		<li><input type="range" min="-1000" max="1000" step="1" value="100" id="i11"></li>
-	</ul>
+<div id="ctrl">
+
 </div>
 
 	
