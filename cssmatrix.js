@@ -150,6 +150,19 @@ CSSMatrix.prototype = {
 	 */
 	rotate : function(rotX,rotY,rotZ){
 
+		// Optimize the rotation transformation by using specific rotation functions when possible
+
+		if( rotX && !( rotY && rotZ ) ){
+			return this.__rotateX__(rotX);
+		}
+		else if( rotY && !( rotX && rotZ ) ){
+			return this.__rotateY__(rotY);
+		}
+		else if( rotZ && !( rotX && rotY ) ){
+			return this.__rotateZ__(rotZ);
+		}
+
+		return this
 	},
 
 	/**
@@ -157,8 +170,8 @@ CSSMatrix.prototype = {
 	 * number of degrees on the X axis
 	 */
 	__rotateX__ : function(angle){
-		var c = Math.cos(angle) * Math.PI / 180, 
-			s = Math.sin(angle) * Math.PI / 180,
+		var c = Math.cos(angle * Math.PI / 180), 
+			s = Math.sin(angle * Math.PI / 180),
 			m = this.__clone__();
 
 		m.m12 = c * this.m12 + s * this.m13;
@@ -179,8 +192,8 @@ CSSMatrix.prototype = {
 	 * number of degrees on the Y axis
 	 */
 	__rotateY__ : function(angle){
-		var c = Math.cos(angle) * Math.PI / 180, 
-			s = Math.sin(angle) * Math.PI / 180,
+		var c = Math.cos(angle * Math.PI / 180), 
+			s = Math.sin(angle * Math.PI / 180),
 			m = this.__clone__();
 
 		m.m11 = c * this.m11 - s * this.m13;
@@ -201,8 +214,8 @@ CSSMatrix.prototype = {
 	 * number of degrees on the Z axis
 	 */
 	__rotateZ__ : function(angle){
-		var c = Math.cos(angle) * Math.PI / 180, 
-			s = Math.sin(angle) * Math.PI / 180,
+		var c = Math.cos(-angle * Math.PI / 180), 
+			s = Math.sin(-angle * Math.PI / 180),
 			m = this.__clone__();
 
 		m.m11 = c * this.m11 + s * this.m12;
