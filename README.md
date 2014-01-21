@@ -21,7 +21,7 @@ The <code>CSSMatrix</code> object represent a 4x4 homogeneous matrix for 3D tran
 
 ### Development 
 
-The development target is to mirror the functionality provided by the native <code>WebkitCSSMatrix</code> object.  Towards that goal, the only function remaining unimplemented at the moment is <code>rotate()</code>. (To match <code>MSCSSMatrix</code>, the function <code>multiplyLeft()</code> will need to be implemented as well).
+The development target is to mirror the functionality provided by the native <code>WebkitCSSMatrix</code> object. 
 
 Nota Bene : functions encapsulated by double dashes, i.e. <code>\_\_functionName\_\_</code> are utility functions designed to optimize the matrix's calculations, but which do not appear in either the WebkitCSSMatrix or the MSCSSMatrix spec.
 
