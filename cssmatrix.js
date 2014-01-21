@@ -1,18 +1,4 @@
 /**
- * WebkitCSSMatrix and MSCSSMatrix polyfill for older browsers and browsers (specifically
- * Firefox and Opera) without current support for this feature.
- * 
- *
- * The CSSMatrix objects represent a 4x4 homogeneous matrix for 3D transforms. The 
- * development target is to mirror the functionality provided by the native 
- * WebkitCSSMatrix object.
- *
- *
- * @see MSDN description of MSCSSMatrix / http://msdn.microsoft.com/en-us/library/windows/apps/hh453593.aspx
- * @see SDL description of WebkitCSSMatrix / https://developer.apple.com/library/safari/documentation/AudioVideo/Reference/WebKitCSSMatrixClassReference/WebKitCSSMatrix/WebKitCSSMatrix.html
- */
-
-/**
  * CSSMatrix (Constructor)
  *
  * The constructor typically recieves a string generated either by 
