@@ -8,7 +8,7 @@ The <code>CSSMatrix</code> object represent a 4x4 homogeneous matrix for 3D tran
 As this is a personal project I made in order to fix a few problems with a website I'm building, I haven't devoted much time to it yet, so it's probably still a few commits behind becoming a fully working polyfill. However, most of the functionality is already there, so if anyone wants to fork this and implement some of the functions that haven't been written yet, I'd be very happy to see that.
 
 
-A few links to help you understand...
+A few links for you...
 
 <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh453593.aspx">MSDN description of MSCSSMatrix</a>
 
