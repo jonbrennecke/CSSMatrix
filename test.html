@@ -8,21 +8,24 @@
 	html, body { height: 100%; margin: 0; }
 	body {	background: radial-gradient(ellipse at center, rgb(64,64,64) 0%,rgb(32,32,32) 100%) no-repeat; font-family: 'Source Code Pro',sans-serif; }
 
-	a {
-		color: white;
-		padding-left: 5%;
+	a { color: white; } 
+
+	p { 
+		color: #aaa; 
+		position: relative; 
+		top: 5%;
+		margin: 0 auto; 
+		width: 75%;
 	}
-	
+	 
 	div#container {
 		-webkit-perspective: 800px;
 		-webkit-perspective-origin: 50% 50%;
-		top: 9%;
-		padding: 25px;
 		text-align: center;
-		position: relative;
+		position: absolute;
 		height: 50%;
-		width: 70%;
-		margin: 0 auto;
+		width: 100%;
+		top: 0;
 	}
 
 	div.cssmatrix {
@@ -30,8 +33,8 @@
 		height: 65%;
 		width: 35%;
 		background-color: #666;
+		margin: 5% 5% 5% 7%;
 		float: left;
-		margin: 0 0 10% 10%;
 		color: #111;
 	}
 	
@@ -42,14 +45,15 @@
 		width: 10em;
 	}
 
-	div.controls {
+	div#controls {
+		background-color: rgba(0,0,0,0.5);
 		position: absolute;
 		top: 50%;
+		height: 50%;
 	}
 
 	ul#ctrl {
 		list-style: none;
-		background-color: rgba(0,0,0,0.5);
 		padding: 5%;
 	}
 
@@ -172,18 +176,13 @@
 <body>
 
 	<div id="container">
-		<div id="custom" class="cssmatrix">
-			<h3>CSSMatrix Polyfill</h3>
-		</div>
-		<div id="webkit" class="cssmatrix">
-			<h3>WebKitCSSMatrix</h3>
-		</div>
+		<div id="custom" class="cssmatrix"><h3>CSSMatrix Polyfill</h3></div>
+		<div id="webkit" class="cssmatrix"><h3>WebKitCSSMatrix</h3></div>
 	</div>
 
 	<div id="controls">
-		<a href="https://github.com/jonbrennecke/CSSMatrix/">Github</a>
-		<ul id="ctrl">
-		</ul>
+		<p>The CSSMatrix class behaves identically to <code>WebKitCSSMatrix</code> in all browsers. Fork it on <a href="https://github.com/jonbrennecke/CSSMatrix/">Github</a>.</p>
+		<ul id="ctrl"></ul>
 	</div>
 
 </body>
