@@ -3,7 +3,7 @@ CSSMatrix
 
 A <code>WebkitCSSMatrix</code> and <code>MSCSSMatrix</code> polyfill for older browsers and browsers (specifically Firefox and Opera) without current support for this feature.
 
-The <code>CSSMatrix</code> object represent a 4x4 homogeneous matrix for 3D transforms.  The development target is to mirror the functionality provided by the native <code>WebkitCSSMatrix</code> object.  Towards that goal, the only function remaining unimplemented is <code>rotate()</code>. (To match <code>MSCSSMatrix</code>, the function <code>multiplyLeft()</code> will need to be implemented as well).
+The <code>CSSMatrix</code> object represent a 4x4 homogeneous matrix for 3D transforms.  The development target is to mirror the functionality provided by the native <code>WebkitCSSMatrix</code> object.  Towards that goal, the only function remaining unimplemented at the moment is <code>rotate()</code>. (To match <code>MSCSSMatrix</code>, the function <code>multiplyLeft()</code> will need to be implemented as well).
 
 
 A few links for you...
