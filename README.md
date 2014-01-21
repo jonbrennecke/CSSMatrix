@@ -14,6 +14,8 @@ A few links to help you understand...
 
 <a href="https://developer.apple.com/library/safari/documentation/AudioVideo/Reference/WebKitCSSMatrixClassReference/WebKitCSSMatrix/WebKitCSSMatrix.html">SDL description of WebkitCSSMatrix</a> 
 
+<a href="http://www.w3.org/TR/css3-transforms/#cssmatrix-interface">W3C specification</a>
+
 
 Nota Bene : functions encapsulated by double dashes, i.e. <code>\_\_functionName\_\_</code> are utility functions designed to optimize the matrix's calculations, but which do not appear in either the WebkitCSSMatrix or the MSCSSMatrix spec.
 
