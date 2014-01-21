@@ -31,53 +31,53 @@ CSSMatrix.prototype = {
 	// getters
 
 	get a(){
-		return this.m22;
+		return this.m11;
 	},
 
 	get b(){
-		return this.m23;
+		return this.m12;
 	},
 
 	get c(){
-		return this.m32;
+		return this.m21;
 	},
 
 	get d(){
-		return this.m33;
+		return this.m22;
 	},
 
 	get e(){
-		return this.m42;
+		return this.m31;
 	},
 
 	get f(){
-		return this.m43;
+		return this.m32;
 	},
 
 	// setters
 
 	set a(value){
-		this.m22 = value;
+		this.m11 = value;
 	},
 
 	set b(value){
-		this.m23 = value;
+		this.m12 = value;
 	},
 
 	set c(value){
-		this.m32 = value;
+		this.m21 = value;
 	},
 
 	set d(value){
-		this.m33 = value;
+		this.m22 = value;
 	},
 
 	set e(value){
-		this.m42 = value;
+		this.m31 = value;
 	},
 
 	set f(value){
-		this.m43 = value;
+		this.m32 = value;
 	},
 
 	/**
@@ -153,24 +153,69 @@ CSSMatrix.prototype = {
 	},
 
 	/**
-	 * TODO
+	 * Return a new matrix that is the result of rotating this matrix by a specified 
+	 * number of degrees on the X axis
 	 */
-	__rotateX__ : function(){
+	__rotateX__ : function(angle){
+		var c = Math.cos(angle) * Math.PI / 180, 
+			s = Math.sin(angle) * Math.PI / 180,
+			m = this.__clone__();
 
+		m.m12 = c * this.m12 + s * this.m13;
+		m.m22 = c * this.m22 + s * this.m23;
+		m.m32 = c * this.m32 + s * this.m33;
+		m.m42 = c * this.m42 + s * this.m43;
+
+		m.m13 = c * this.m13 - s * this.m12;
+		m.m23 = c * this.m23 - s * this.m22;
+		m.m33 = c * this.m33 - s * this.m32;
+		m.m43 = c * this.m43 - s * this.m42;
+
+		return m
 	},
 
 	/**
-	 * TODO
+	 * Return a new matrix that is the result of rotating this matrix by a specified 
+	 * number of degrees on the Y axis
 	 */
-	__rotateY__ : function(){
+	__rotateY__ : function(angle){
+		var c = Math.cos(angle) * Math.PI / 180, 
+			s = Math.sin(angle) * Math.PI / 180,
+			m = this.__clone__();
 
+		m.m11 = c * this.m11 - s * this.m13;
+		m.m21 = c * this.m21 - s * this.m23;
+		m.m31 = c * this.m31 - s * this.m33;
+		m.m41 = c * this.m41 - s * this.m43;
+
+		m.m13 = c * this.m13 + s * this.m11;
+		m.m23 = c * this.m23 + s * this.m21;
+		m.m33 = c * this.m33 + s * this.m31;
+		m.m43 = c * this.m43 + s * this.m41;
+
+		return m
 	},
 
 	/**
-	 * TODO
+	 * Return a new matrix that is the result of rotating this matrix by a specified 
+	 * number of degrees on the Z axis
 	 */
-	__rotateZ__ : function(){
+	__rotateZ__ : function(angle){
+		var c = Math.cos(angle) * Math.PI / 180, 
+			s = Math.sin(angle) * Math.PI / 180,
+			m = this.__clone__();
 
+		m.m11 = c * this.m11 + s * this.m12;
+		m.m21 = c * this.m21 + s * this.m22;
+		m.m31 = c * this.m31 + s * this.m32;
+		m.m41 = c * this.m41 + s * this.m42;
+
+		m.m12 = c * this.m12 - s * this.m11;
+		m.m22 = c * this.m22 - s * this.m21;
+		m.m32 = c * this.m32 - s * this.m31;
+		m.m42 = c * this.m42 - s * this.m41;
+
+		return m
 	},
 
 	/**
@@ -204,20 +249,20 @@ CSSMatrix.prototype = {
 		}
 
 		var r = new CSSMatrix(), 
-			rho = Math.cos(angle) * Math.PI / 180, 
-			phi = Math.sin(angle) * Math.PI / 180;
+			c = Math.cos(angle) * Math.PI / 180, 
+			s = Math.sin(angle) * Math.PI / 180;
 
-		r.m11 = rho + x * x * ( 1 - rho );
-		r.m12 = x * y * ( 1 - rho ) - z * phi;
-		r.m13 = x * z * ( 1 - rho ) + y * phi;
+		r.m11 = c + x * x * ( 1 - c );
+		r.m12 = x * y * ( 1 - c ) - z * s;
+		r.m13 = x * z * ( 1 - c ) + y * s;
 
-		r.m21 = y * x * ( 1 - rho ) + z * phi;
-		r.m22 = rho + y * y * ( 1 - rho );
-		r.m23 = y * z * ( 1 - rho ) - x * phi;
+		r.m21 = y * x * ( 1 - c ) + z * s;
+		r.m22 = c + y * y * ( 1 - c );
+		r.m23 = y * z * ( 1 - c ) - x * s;
 
-		r.m31 = z * x * ( 1 - rho ) - y * phi;
-		r.m32 = z * y * ( 1 - rho ) + x * phi;
-		r.m33 = rho + z * z * ( 1 - rho );
+		r.m31 = z * x * ( 1 - c ) - y * s;
+		r.m32 = z * y * ( 1 - c ) + x * s;
+		r.m33 = c + z * z * ( 1 - c );
 
 		return this.__clone__().multiply( r ); // return a copy of this matrix multiplied by the rotation matrix
 	},
@@ -270,14 +315,20 @@ CSSMatrix.prototype = {
 	 * TODO
 	 */
 	skewX : function(angle){
-
+		angle *= Math.PI / 180;
+		var m = this.__clone__();
+		m.m21 = Math.tan( angle );
+		return m;
 	},
 
 	/**
 	 * TODO
 	 */
 	skewY : function(angle){
-
+		angle *= Math.PI / 180;
+		var m = this.__clone__();
+		m.m12 = Math.tan( angle );
+		return m;
 	},
 
 	/**
@@ -295,10 +346,22 @@ CSSMatrix.prototype = {
 	},
 
 	/**
-	 * TODO
+	 * Returns the result of translating this matrix by a given vector
+	 *
+	 * @param x - the x component of the vector.
+	 * @param y - the y component of the vector.
+	 * @param z - the z component of the vector. If undefined, 0 is used.
+	 * @return - A new matrix that is the result of translating this matrix. 
 	 */
 	translate : function(x,y,z){
+		var m = this.__clone__(), z = z || 0;
 
+		m.m14 = m.m11 * x + m.m12 * y + mm.m13 * z + m.m14;
+		m.m24 = m.m21 * x + m.m22 * y + mm.m23 * z + m.m24
+		m.m34 = m.m31 * x + m.m41 * y + mm.m33 * z + m.n34;
+		m.m44 = m.m41 * x + m.m42 * y + mm.m43 * z + m.m44;
+
+		return m;
 	},
 
 	/**
@@ -353,5 +416,4 @@ CSSMatrix.prototype = {
 		}
 		return copy
 	}
-
 };
