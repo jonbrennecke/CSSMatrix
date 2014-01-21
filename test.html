@@ -37,7 +37,6 @@
 		height: 2em;
 		width: 10em;
 		padding-top: 0.5em;
-		/*border: 1px solid #111;*/
 	}
 
 	ul#ctrl li label {
@@ -49,43 +48,83 @@
  	<script type="text/javascript" src="cssmatrix.js"></script>
 	<script type="text/javascript">
 
-	var inputs = [ 'rotateX', 'rotateY', 'rotateZ', 'translate', 'skewX', 'skewY', 'scale' ];
+	var inputs = [ 'rotateX', 'rotateY', 'rotateZ', 'translateX', 'translateY', 'translateZ', 'skewX', 'skewY', 'scaleX', 'scaleY', 'scaleZ' ];
+
+	var Ctrlr = function(){
+		this.webkit = $('#webkit');
+		this.custom = $('#custom');
+	};
+
+	Ctrlr.prototype = {
+		
+		rotateX : function(x){},
+
+		rotateY : function(y){}, 
+
+		rotateZ : function(z){},
+
+		translateX : function(x){ 
+			var m1 = new WebKitCSSMatrix(), m2 = new CSSMatrix();
+			this.update(m1.translate(x,0,0).toString(), m2.translate(x,0,0).toString());
+		},
+
+		translateY : function(y){
+			var m1 = new WebKitCSSMatrix(), m2 = new CSSMatrix();
+			this.update(m1.translate(0,y,0).toString(), m2.translate(0,y,0).toString());
+		},
+
+		translateZ : function(z){
+			var m1 = new WebKitCSSMatrix(), m2 = new CSSMatrix();
+			this.update(m1.translate(0,0,z).toString(), m2.translate(0,0,z).toString())
+		},
+
+		skewX : function(x){
+			var m1 = new WebKitCSSMatrix(), m2 = new CSSMatrix();
+			this.update(m1.skewX(x).toString(), m2.skewX(x).toString())
+		},
+
+		skewY : function(y){
+			var m1 = new WebKitCSSMatrix(), m2 = new CSSMatrix();
+			this.update(m1.skewY(y).toString(), m2.skewY(y).toString())
+		},
+
+		scaleX : function(x){
+			var m1 = new WebKitCSSMatrix(), m2 = new CSSMatrix();
+			this.update(m1.scale(x,1,1).toString(), m2.scale(x,1,1).toString())
+		},
+
+		scaleY : function(y){
+			var m1 = new WebKitCSSMatrix(), m2 = new CSSMatrix();
+			this.update(m1.scale(1,y,1).toString(), m2.scale(1,y,1).toString())
+		},
+
+		scaleZ : function(z){
+			var m1 = new WebKitCSSMatrix(), m2 = new CSSMatrix();
+			this.update(m1.scale(1,1,z).toString(), m2.scale(1,1,z).toString())
+		},
+
+		update : function(str1,str2){
+			webkit.style.webkitTransform = str1;
+			custom.style.webkitTransform = str2;
+		}
+	};
 
 	window.onload = function(){
-		
-		var custom = document.getElementById('custom'),
-			webkit = document.getElementById('webkit'),
-			controls = document.getElementById('ctrl');
+
+		var ctrlr = new Ctrlr();
 
 		for(var i=0;i<inputs.length;i++){
 
-			$(controls).append(
+			$('#ctrl').append(
 				"<li><label for='" + inputs[i] + "'>" + inputs[i] + 
 				"</label><input type='range' value='0' step='0.1' min='-10' max='10' name='" + 
 				inputs[i] + "' id='" + inputs[i] + "' /></li>")
 
+			$('#'+inputs[i]).change(function(i){
+				ctrlr[this.id]($(this).val())
+			})
+
 		}
-	
-		// window.addEventListener('mousemove',function(e){
-
-		// 	var m1 = new WebKitCSSMatrix();
-
-		// 	// scale x1 and y1 to the interval (-1,1)
-		// 	var x1 = (e.x / window.innerWidth - 0.5 ) * 2,
-		// 		y1 = - (e.y / window.innerHeight - 0.5 ) * 2;
-
-		// 	webkit.style.webkitTransform = m1.translate(35*x1,-15*y1,0).toString();
-
-		// 	var m2 = new CSSMatrix();
-
-		// 	// scale x2 and y2 to the interval (-1,1)
-		// 	var x2 = (e.x / window.innerWidth - 0.5 ) * 2,
-		// 		y2 = - (e.y / window.innerHeight - 0.5 ) * 2;
-
-		// 	custom.style.webkitTransform = m2.translate(35*x2,-15*y2,0).toString();
-
-		// },false);
-
 	}
 
 	</script>
