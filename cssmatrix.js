@@ -13,7 +13,7 @@ var CSSMatrix = function(str){
 
 	// if no input string is provided, then return the 4x4 identity matrix
 	if(!str || str === 'none') {
-		for(var i=0, j=0;i<16;i++){
+		for(var i=0;i<16;i++){
 			this['m'+((i/4|0)+1)+(i%4+1)] = i%4==(i/4|0) ? 1 : 0; 
 		}
 		return this
