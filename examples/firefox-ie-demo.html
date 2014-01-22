@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+ 	<script type="text/javascript" src="../cssmatrix.js"></script>
+	<script type="text/javascript">
+
+	var inputs = [ 'rotateX', 'rotateY', 'rotateZ', 'translateX', 'translateY', 'translateZ', 'skewX', 'skewY', 'scaleX', 'scaleY', 'scaleZ' ];
+
+	// the Controller attaches the range inputs to their respective matrix functions
+	var Ctrlr = function(){
+		// this.webkit = $('#webkit');
+		this.matrix = $('#custom');
+	};
+
+	Ctrlr.prototype = {
+
+		rotateX : function(x){
+			var m = new CSSMatrix();
+			this.matrix.get(0).style.transform = m.rotate(9*x,0,0).toString();
+		},
+
+		rotateY : function(y){
+			var m = new CSSMatrix();
+			this.matrix.get(0).style.transform = m.rotate(0,9*y,0).toString()
+		}, 
+
+		rotateZ : function(z){
+			var m = new CSSMatrix();
+			this.matrix.get(0).style.transform = m.rotate(0,0,9*z).toString()
+		},
+
+		translateX : function(x){ 
+			var m = new CSSMatrix();
+			this.matrix.get(0).style.transform = m.translate(x,0,0).toString()
+		},
+
+		translateY : function(y){
+			var m = new CSSMatrix();
+			this.matrix.get(0).style.transform = m.translate(0,y,0).toString()
+		},
+
+		translateZ : function(z){
+			var m = new CSSMatrix();
+			this.matrix.get(0).style.transform = m.translate(0,0,z).toString()
+		},
+
+		skewX : function(x){
+			var m = new CSSMatrix();
+			this.matrix.get(0).style.transform = m.skewX(x).toString()
+		},
+
+		skewY : function(y){
+			var m = new CSSMatrix();
+			this.matrix.get(0).style.transform = m.skewY(y).toString()
+		},
+
+		scaleX : function(x){
+			var m = new CSSMatrix();
+			this.matrix.get(0).style.transform = m.scale(x,1,1).toString()
+		},
+
+		scaleY : function(y){
+			var m = new CSSMatrix();
+			this.matrix.get(0).style.transform = m.scale(1,y,1).toString()
+		},
+
+		scaleZ : function(z){
+			var m = new CSSMatrix();
+			this.matrix.get(0).style.transform = m.scale(1,1,z).toString()
+		},
+
+		update : function(str1,str2){
+			// webkit.style.webkitTransform = str1;
+			// custom.style.webkitTransform = str2;
+		}
+	};
+
+	window.onload = function(){
+
+		var ctrlr = new Ctrlr();
+
+		for(var i=0;i<inputs.length;i++){
+
+			$('#ctrl').append(
+				"<li><label for='" + inputs[i] + "'>" + inputs[i] + 
+				"</label><input type='range' value='0' step='0.1' min='-10' max='10' name='" + 
+				inputs[i] + "' id='" + inputs[i] + "' /></li>")
+
+			$('#'+inputs[i]).change(function(i){
+				ctrlr[this.id]($(this).val())
+			})
+
+		}
+	}
+
+	</script>
+</head>
+<body>
+
+	<div id="container">
+		<div id="custom" class="cssmatrix"><h3>CSSMatrix Polyfill</h3></div>
+	</div>
+
+	<div id="controls">
+		<p>The CSSMatrix class behaves identically to <code>WebKitCSSMatrix</code> in all browsers. Fork it on <a href="https://github.com/jonbrennecke/CSSMatrix/">Github</a>.</p>
+		<ul id="ctrl"></ul>
+	</div>
+
+</body>
+</html>
