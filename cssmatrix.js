@@ -35,11 +35,11 @@ CSSMatrix.prototype = {
 	},
 
 	get b(){
-		return this.m12;
+		return this.m21;
 	},
 
 	get c(){
-		return this.m21;
+		return this.m12;
 	},
 
 	get d(){
@@ -47,11 +47,11 @@ CSSMatrix.prototype = {
 	},
 
 	get e(){
-		return this.m31;
+		return this.m13;
 	},
 
 	get f(){
-		return this.m32;
+		return this.m23;
 	},
 
 	// setters
@@ -61,11 +61,11 @@ CSSMatrix.prototype = {
 	},
 
 	set b(value){
-		this.m12 = value;
+		this.m21 = value;
 	},
 
 	set c(value){
-		this.m21 = value;
+		this.m12 = value;
 	},
 
 	set d(value){
@@ -73,11 +73,11 @@ CSSMatrix.prototype = {
 	},
 
 	set e(value){
-		this.m31 = value;
+		this.m13 = value;
 	},
 
 	set f(value){
-		this.m32 = value;
+		this.m23 = value;
 	},
 
 	/**
