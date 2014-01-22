@@ -28,57 +28,35 @@ CSSMatrix.prototype = {
 
 	constructor : CSSMatrix,
 
+	PID180 : Math.PI / 180,
+
 	// getters
 
-	get a(){
-		return this.m11;
-	},
+	get a(){ return this.m11; },
 
-	get b(){
-		return this.m21;
-	},
+	get b(){ return this.m21; },
 
-	get c(){
-		return this.m12;
-	},
+	get c(){ return this.m12; },
 
-	get d(){
-		return this.m22;
-	},
+	get d(){ return this.m22; },
 
-	get e(){
-		return this.m13;
-	},
+	get e(){ return this.m13; },
 
-	get f(){
-		return this.m23;
-	},
+	get f(){ return this.m23; },
 
 	// setters
 
-	set a(value){
-		this.m11 = value;
-	},
+	set a(value){ this.m11 = value; },
 
-	set b(value){
-		this.m21 = value;
-	},
+	set b(value){ this.m21 = value; },
 
-	set c(value){
-		this.m12 = value;
-	},
+	set c(value){ this.m12 = value; },
 
-	set d(value){
-		this.m22 = value;
-	},
+	set d(value){ this.m22 = value; },
 
-	set e(value){
-		this.m13 = value;
-	},
+	set e(value){ this.m13 = value; },
 
-	set f(value){
-		this.m23 = value;
-	},
+	set f(value){ this.m23 = value; },
 
 	/**
 	 * Returns the inverse of this matrix
@@ -146,7 +124,13 @@ CSSMatrix.prototype = {
 	},
 
 	/**
-	 * TODO
+	 * Returns the result of rotating this matrix by a given vector.
+	 *
+	 * @param rotX - The x component in the vector, in degrees.
+	 * @param rotY - The y component in the vector, in degrees. If undefined, the x component is used.
+	 * @param rotZ - The z component in the vector, in degrees. If undefined, the x component is used.
+	 * @return - A new matrix that is the result of rotating this matrix by each of the three rotation 
+	 * matrices about the major axes, first the x axes, y axes, and then z axes.
 	 */
 	rotate : function(rotX,rotY,rotZ){
 
@@ -162,7 +146,11 @@ CSSMatrix.prototype = {
 			return this.__rotateZ__(rotZ);
 		}
 
-		return this
+		rotY = rotY || rotX;
+		rotZ = rotZ || rotZ;
+
+		// TODO optimize this with multiplication by a single matrix
+		return this.__rotateX__(rotX).__rotateY__(rotY).__rotateZ__(rotZ);
 	},
 
 	/**
@@ -192,8 +180,8 @@ CSSMatrix.prototype = {
 	 * number of degrees on the Y axis
 	 */
 	__rotateY__ : function(angle){
-		var c = Math.cos(-angle * Math.PI / 180), 
-			s = Math.sin(-angle * Math.PI / 180),
+		var c = Math.cos(-angle * this.PID180), 
+			s = Math.sin(-angle * this.PID180),
 			m = this.__clone__();
 
 		m.m11 = c * this.m11 - s * this.m13;
@@ -214,8 +202,8 @@ CSSMatrix.prototype = {
 	 * number of degrees on the Z axis
 	 */
 	__rotateZ__ : function(angle){
-		var c = Math.cos(-angle * Math.PI / 180), 
-			s = Math.sin(-angle * Math.PI / 180),
+		var c = Math.cos(-angle * this.PID180), 
+			s = Math.sin(-angle * this.PID180),
 			m = this.__clone__();
 
 		m.m11 = c * this.m11 + s * this.m12;
@@ -262,8 +250,8 @@ CSSMatrix.prototype = {
 		}
 
 		var r = new CSSMatrix(), 
-			c = Math.cos(angle) * Math.PI / 180, 
-			s = Math.sin(angle) * Math.PI / 180;
+			c = Math.cos(angle) * this.PID180, 
+			s = Math.sin(angle) * this.PID180;
 
 		r.m11 = c + x * x * ( 1 - c );
 		r.m12 = x * y * ( 1 - c ) - z * s;
@@ -328,7 +316,7 @@ CSSMatrix.prototype = {
 	 * TODO
 	 */
 	skewX : function(angle){
-		angle *= Math.PI / 180;
+		angle *= this.PID180;
 		var m = this.__clone__();
 		m.m21 = Math.tan( angle );
 		return m;
@@ -338,7 +326,7 @@ CSSMatrix.prototype = {
 	 * TODO
 	 */
 	skewY : function(angle){
-		angle *= Math.PI / 180;
+		angle *= this.PID180;
 		var m = this.__clone__();
 		m.m12 = Math.tan( angle );
 		return m;
