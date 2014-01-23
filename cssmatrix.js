@@ -90,8 +90,8 @@ CSSMatrix.prototype = {
 	 *
 	 * @return - A new matrix that is the result of multiplying this matrix by the given matrix
 	 */
-	multiply : function(b){
-		var a = this.__clone__();
+	multiply : function(a){
+		var b = this.__clone__();
 
 		a.m11 = a.m11*b.m11 + a.m12*b.m21 + a.m13*b.m31 + a.m14*b.m41;
 		a.m12 = a.m11*b.m12 + a.m12*b.m22 + a.m13*b.m32 + a.m14*b.m42;
@@ -337,10 +337,10 @@ CSSMatrix.prototype = {
 	 *
 	 */
 	toString : function(){
-		var str = this.m11;
+		var str = this.m11.toFixed(6);
 
 		for(var i=1;i<16;i++){
-			str += ',' + ( ( ( this['m'+((i/4|0)+1)+(i%4+1)] * 1e6 | 0 ) * 1e-6 ) );
+			str += ',' + ( this['m'+((i/4|0)+1)+(i%4+1)] ).toFixed(6);
 		}
 
 		return 'matrix3d(' + str + ')';
