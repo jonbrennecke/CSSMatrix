@@ -340,7 +340,8 @@ CSSMatrix.prototype = {
 		var str = this.m11;
 
 		for(var i=1;i<16;i++){
-			str += ',' + this['m'+((i/4|0)+1)+(i%4+1)];
+			// console.log(( ( ( this['m'+((i/4|0)+1)+(i%4+1)] * 1e6 | 0 ) * 1e-6 ) ) )
+			str += ',' + ( ( ( this['m'+((i/4|0)+1)+(i%4+1)] * 1e6 | 0 ) * 1e-6 ) );
 		}
 
 		return 'matrix3d(' + str + ')';
