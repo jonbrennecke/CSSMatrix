@@ -302,7 +302,7 @@ CSSMatrix.prototype = {
 	setMatrixValue : function(str){
 
 		// when a string is provided, parse it for the matrix values
-		var values = str.match(/\d*[.]?\d+(?=,|\))/g);
+		var values = str.match(/[+-]?\d*[.]?\d+(?=,|\))/g);
 
 		// set the 3D values this.m11 - this.m44
 		for(var i=0;i<16;i++){
