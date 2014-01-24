@@ -90,8 +90,11 @@ CSSMatrix.prototype = {
 	 *
 	 * @return - A new matrix that is the result of multiplying this matrix by the given matrix
 	 */
-	multiply : function(a){
-		var b = this.__clone__();
+	multiply : function(m){
+		return this.__multiplyMatrices__(m,this.__clone__());
+	},
+
+	__multiplyMatrices__ : function(a,b){
 
 		a.m11 = a.m11*b.m11 + a.m12*b.m21 + a.m13*b.m31 + a.m14*b.m41;
 		a.m12 = a.m11*b.m12 + a.m12*b.m22 + a.m13*b.m32 + a.m14*b.m42;
@@ -120,7 +123,7 @@ CSSMatrix.prototype = {
 	 * TODO
 	 */
 	multiplyLeft : function(b){
-
+		return this.__multiplyMatrices__(this.__clone__(),m);
 	},
 
 	/**
