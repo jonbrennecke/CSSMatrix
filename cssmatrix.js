@@ -88,13 +88,23 @@ CSSMatrix.prototype = {
 	/**
 	 * Returns the result of multiplying this matrix by a given matrix that is on the right
 	 *
+	 * @param m - a matrix (which will be on the right hand side of the multiplication) 
 	 * @return - A new matrix that is the result of multiplying this matrix by the given matrix
 	 */
 	multiply : function(m){
-		return this.__multiplyMatrices__(m,this.__clone__());
+		return this.__multiplyMatrices__(this.__clone__(),m);
 	},
 
-	__multiplyMatrices__ : function(a,b){
+
+	/**
+	 * Returns the result of multiplying two given matrices
+	 * (both matrices can be either WebKitCSSMatrix, MSCSSMatrix, or CSSMatrix)
+	 *
+	 * @param b - the matrix on the left handside
+	 * @param a - the matrix on the right hand side of the multiplication
+	 * @return - A new matrix that is the result of multiplying this matrix by the given matrix
+	 */
+	__multiplyMatrices__ : function(b,a){
 
 		a.m11 = a.m11*b.m11 + a.m12*b.m21 + a.m13*b.m31 + a.m14*b.m41;
 		a.m12 = a.m11*b.m12 + a.m12*b.m22 + a.m13*b.m32 + a.m14*b.m42;
@@ -120,10 +130,13 @@ CSSMatrix.prototype = {
 	},
 
 	/**
-	 * TODO
+	 * Returns the result of multiplying this matrix by a given matrix that is on the left
+	 *
+	 * @param m - a matrix (which will be on the left hand side of the multiplication) 
+	 * @return - A new matrix that is the result of multiplying this matrix by the given matrix
 	 */
-	multiplyLeft : function(b){
-		return this.__multiplyMatrices__(this.__clone__(),m);
+	multiplyLeft : function(m){
+		return this.__multiplyMatrices__(m,this.__clone__());
 	},
 
 	/**
