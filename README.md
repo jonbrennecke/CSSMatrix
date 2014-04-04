@@ -1,7 +1,7 @@
 CSSMatrix
 =========
 
-See a live comparison of this polyfill vs <code>WebkitCSSMatrix</code> over at <a href="http://cdpn.io/mvqab">CodePen</a>!
+See a live comparison of this polyfill vs <code>WebkitCSSMatrix</code> over at <a href="http://cdpn.io/mvqab">CodePen</a>! Note that this demo only works in Chrome, since it calls the <code>WebkitCSSMatrix</code> object.
 
 ### Description
 A <code>WebkitCSSMatrix</code> and <code>MSCSSMatrix</code> polyfill for older browsers and browsers (specifically Firefox and Opera) without current support for this feature.
